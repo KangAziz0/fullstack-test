@@ -29,6 +29,19 @@
         //call method "fetchDataPosts"
         fetchDataPosts();
     });
+    
+    //method deletePost
+    const deletePost = async (id) => {
+
+        //delete post with API
+        await api.delete(`/api/posts/${id}`)
+        .then(() => {
+
+            //call method "fetchDataPosts"
+            fetchDataPosts();
+        })
+
+    };
 
 </script>
 
@@ -64,7 +77,7 @@
                                     <td>{{ post.content }}</td>
                                     <td class="text-center">
                                         <router-link :to="{ name: 'posts.edit', params:{id: post.id} }" class="btn btn-sm btn-primary rounded-sm shadow border-0 me-2">EDIT</router-link>
-                                        <button class="btn btn-sm btn-danger rounded-sm shadow border-0">DELETE</button>
+                                        <button @click.prevent="deletePost(post.id)" class="btn btn-sm btn-danger rounded-sm shadow border-0">DELETE</button>
                                     </td>
                                 </tr>
                             </tbody>
